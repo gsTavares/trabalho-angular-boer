@@ -56,11 +56,12 @@ export class HomeComponent {
         height: 350,
         width: "100%",
         type: "bar",
-        background: '#fff'
+        background: '#fff',
+        redrawOnWindowResize: true
       },
       title: {
         text: "Number of COVID-19 cases in different countries",
-        align: 'center'
+        align: 'center',
       },
     };
   }

@@ -1,7 +1,7 @@
-<main>
-  @if(shouldRenderMenu) {
-    <app-header-without-session></app-header-without-session>
+<main class="w-full relative">
+  @if(isLogged) {
+  <app-header-with-session></app-header-with-session>
+  } @else {
+  <app-header-without-session></app-header-without-session>
   }
-  <router-outlet></router-outlet>
 </main>
-

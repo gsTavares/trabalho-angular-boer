@@ -1,0 +1,31 @@
+@if(shouldRenderMenu) {
+<nav class="h-14 w-full bg-zinc-900 flex fixed z-50 cursor-pointer">
+    <section class="m-3" (click)="isShowingSidebar = !isShowingSidebar">
+        <i class="ri-menu-line text-lg text-white ps-3"></i>
+    </section>
+</nav>
+<section class="flex">
+    <section
+        class="fixed p-3 w-2/4 min-h-[100vh] top-14 text-white bg-zinc-900 transition-transform ease-in-out lg:w-max z-40"
+        [ngClass]="{'-translate-x-full': !isShowingSidebar}">
+        <nav>
+            <ul>
+                <li class="flex items-center justify-between cursor-pointer" title="Home" [routerLink]="['/']">
+                    <span class="font-bold ms-3">Home</span>
+                    <i class="ri-home-4-line justify-self-end me-5 lg:ms-11"></i>
+                </li>
+                <li class="flex items-center justify-between cursor-pointer mt-5" title="Dashboard"
+                    [routerLink]="['/dashboard']">
+                    <span class="font-bold ms-3">Dashboard</span>
+                    <i class="ri-pie-chart-2-line justify-self-end me-5 lg:ms-11"></i>
+                </li>
+            </ul>
+        </nav>
+    </section>
+    <section class="mt-20 lg:mt-14">
+        <router-outlet></router-outlet>
+    </section>
+</section>
+} @else {
+    <router-outlet></router-outlet>
+}
