@@ -10,40 +10,55 @@
                         <span class="block mb-1">
                             E-mail *
                         </span>
-                        <input type="text" [formControl]="emailFormControl" placeholder="exemplo@email.com" class="w-full indent-7 rounded-sm placeholder:opacity-40"
-                        [ngClass]="{'border-red-600': submitted && emailFormControl.errors, 'focus:ring-red-600': submitted && emailFormControl.errors, 'focus:border-red-500': submitted && emailFormControl.errors}" />
+                        <input type="text" [formControl]="emailFormControl" placeholder="exemplo@email.com"
+                            class="w-full indent-7 rounded-sm placeholder:opacity-40"
+                            [ngClass]="{'border-red-600': submitted && emailFormControl.errors, 'focus:ring-red-600': submitted && emailFormControl.errors, 'focus:border-red-500': submitted && emailFormControl.errors}" />
                         <div class="absolute top-[2.35rem] left-3 bg-white">
                             <i class="ri-mail-fill"></i>
                         </div>
                         @if(submitted && emailFormControl.errors) {
-                            <div class="text-red-600">Um email válido é obrigatório</div>
+                        <div class="text-red-600">Um email válido é obrigatório</div>
                         }
                     </label>
                     <label class="block relative mt-5">
                         <span class="block mb-1">
                             Senha *
                         </span>
-                        <input type="password" [formControl]="passwordFormControl" placeholder="•••••••" class="w-full indent-7 rounded-sm placeholder:opacity-40"
-                        [ngClass]="{'border-red-600': submitted && passwordFormControl.errors, 'focus:ring-red-600': submitted && passwordFormControl.errors, 'focus:border-red-500': submitted && passwordFormControl.errors}" />
+                        <input type="password" [formControl]="passwordFormControl" placeholder="•••••••"
+                            class="w-full indent-7 rounded-sm placeholder:opacity-40"
+                            [ngClass]="{'border-red-600': submitted && passwordFormControl.errors, 'focus:ring-red-600': submitted && passwordFormControl.errors, 'focus:border-red-500': submitted && passwordFormControl.errors}" />
                         <div class="absolute top-[2.35rem] left-3 bg-white">
                             <i class="ri-shield-keyhole-fill"></i>
                         </div>
                         @if(submitted && passwordFormControl.errors) {
-                            <div class="text-red-600">A senha é obrigatória</div>
+                        <div class="text-red-600">A senha é obrigatória</div>
                         }
                     </label>
                     <div class="mt-5 flex flex-col justify-center items-center">
                         <small class="text-sm block">
-                            <a [routerLink]="['/register']" class="text-blue-700 font-semibold">Eu não tenho uma conta</a>
+                            <a [routerLink]="['/register']" class="text-blue-700 font-semibold">Eu não tenho uma
+                                conta</a>
                         </small>
                         <small class="text-sm block">
                             <a class="text-blue-700 font-semibold">Eu esqueci a minha senha</a>
                         </small>
                     </div>
 
+                    <button
+                        class="bg-green-500 text-white font-semibold mt-5 py-2 w-full rounded-sm hover:bg-green-800 transition-colors"
+                        title="Entrar" (click)="login()">ENTRAR</button>
 
-                    <button class="bg-green-500 text-white font-semibold mt-5 py-2 w-full rounded-sm hover:bg-green-800 transition-colors" title="Entrar"
-                        (click)="login()">ENTRAR</button>
+                    <div class="mt-5 flex flex-col justify-center">
+                        <div id="g_id_onload"
+                            data-client_id="186147523306-tdv2bm86b12sjo150er5pp6d7sds6c1l.apps.googleusercontent.com"
+                            data-context="signin" data-ux_mode="redirect"
+                            data-login_uri="https://accounts.google.com/o/oauth2/auth" data-auto_prompt="false">
+                        </div>
+
+                        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
+                            data-text="signin_with" data-size="large" data-logo_alignment="left">
+                        </div>
+                    </div>
                 </form>
             </section>
         </section>
