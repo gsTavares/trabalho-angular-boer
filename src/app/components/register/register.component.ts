@@ -55,7 +55,7 @@ export class RegisterComponent {
     if (registerForm.valid) {
       if (this.userService.addUser(registerForm.value)) {
         this.loginService.setLoggedUserSubject(registerForm.value);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login-screen']);
       } else {
         alert('This email was alredy used!');
       }

@@ -10,7 +10,7 @@ export const routes: Routes = [
         component: HomeComponent
     },
     {
-        path: 'login',
+        path: 'login-screen',
         component: LoginComponent
     },
     {

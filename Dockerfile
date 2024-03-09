@@ -8,3 +8,16 @@ RUN npm run build
 FROM nginx:alpine
 COPY --from=build /app/dist/trabalho-angular-boer/browser /usr/share/nginx/html
 EXPOSE 80
+
+FROM node:14 AS server
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+COPY --from=build /app/dist/trabalho-angular-boer/browser /app/public
+EXPOSE 3000
+
+FROM node:14 AS production
+WORKDIR /app
+COPY --from=server /app .
+CMD ["node", "server.js"]
