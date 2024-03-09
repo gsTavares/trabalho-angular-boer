@@ -22,7 +22,7 @@ export class HeaderWithoutSessionComponent implements OnInit {
     this.router.events.subscribe({
       next: (event) => {
         if (event instanceof NavigationEnd) {
-          this.shouldRenderMenu = event.url !== '/login';
+          this.shouldRenderMenu = event.url !== '/login' && event.url !== '/register';
         }
       }
     })

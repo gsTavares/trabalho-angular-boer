@@ -1,6 +1,6 @@
 <main class="w-full relative">
-  @if(isLogged) {
-  <app-header-with-session></app-header-with-session>
+  @if(isLoggedIn) {
+  <app-header-with-session (onLogout)="logout($event)" [loggedUser]="loggedUser"></app-header-with-session>
   } @else {
   <app-header-without-session></app-header-without-session>
   }

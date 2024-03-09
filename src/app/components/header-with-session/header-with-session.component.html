@@ -1,7 +1,13 @@
 @if(shouldRenderMenu) {
-<nav class="h-14 w-full bg-zinc-900 flex fixed z-50 cursor-pointer">
-    <section class="m-3" (click)="isShowingSidebar = !isShowingSidebar">
+<nav class="h-14 w-full bg-zinc-900 flex fixed z-50 items-center">
+    <section class="m-3 cursor-pointer " (click)="isShowingSidebar = !isShowingSidebar">
         <i class="ri-menu-line text-lg text-white ps-3"></i>
+    </section>
+    <section class="ms-auto m-3 cursor-pointer ">
+        <span class="text-white">
+            <i class="ri-user-3-line"></i>
+            Olá {{ loggedUser?.name }}!
+        </span>
     </section>
 </nav>
 <section class="flex">
@@ -19,10 +25,15 @@
                     <span class="font-bold ms-3">Dashboard</span>
                     <i class="ri-pie-chart-2-line justify-self-end me-5 lg:ms-11"></i>
                 </li>
+                <li class="flex items-center justify-between cursor-pointer mt-5" title="Logout"
+                    (click)="terminateSession()">
+                    <span class="font-bold ms-3">Logout</span>
+                    <i class="ri-logout-box-line justify-self-end me-5 lg:ms-11"></i>
+                </li>
             </ul>
         </nav>
     </section>
-    <section class="mt-20 lg:mt-14">
+    <section class="mt-14">
         <router-outlet></router-outlet>
     </section>
 </section>

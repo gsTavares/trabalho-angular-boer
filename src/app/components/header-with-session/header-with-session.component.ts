@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { User } from '../../@types/user';
 
 @Component({
   selector: 'app-header-with-session',
@@ -11,21 +12,31 @@ import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router
 })
 export class HeaderWithSessionComponent implements OnInit {
 
+  @Output() onLogout: EventEmitter<boolean> = new EventEmitter();
+
   isShowingSidebar: boolean = false;
 
   shouldRenderMenu: boolean = true;
 
-  constructor(private router: Router) {
+  @Input() loggedUser?: User
+
+  constructor(
+    private router: Router,
+  ) {
 
   }
   ngOnInit(): void {
     this.router.events.subscribe({
       next: (event) => {
         if (event instanceof NavigationEnd) {
-          this.shouldRenderMenu = event.url !== '/login';
+          this.shouldRenderMenu = event.url !== '/login' && event.url !== '/register';
         }
       }
-    })
+    });
+  }
+
+  terminateSession() {
+    this.onLogout.emit(false);
   }
 
 }

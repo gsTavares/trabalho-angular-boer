@@ -1,0 +1,105 @@
+<main class="w-[100vw] max-w-[100vw] h-[100vh] min-h-[100vh] bg-zinc-900 flex flex-col justify-center items-center">
+    <section class="w-full lg:w-4/12">
+        <section class="m-5">
+            <header>
+                <h1 class="font-bold text-white text-4xl text-center"><i class="ri-user-3-line"></i>Registrar</h1>
+            </header>
+            <section class="bg-white p-5 my-5 rounded-sm shadow-xl">
+                <form>
+                    <label class="block relative">
+                        <span class="block mb-1">
+                            E-mail *
+                        </span>
+                        <input type="text" [formControl]="emailFormControl" placeholder="exemplo@email.com"
+                            class="w-full indent-7 rounded-sm placeholder:opacity-40"
+                            [ngClass]="{'border-red-600': submitted && emailFormControl.errors, 'focus:ring-red-600': submitted && emailFormControl.errors, 'focus:border-red-500': submitted && emailFormControl.errors}" />
+                        <div class="absolute top-[2.35rem] left-3 bg-white">
+                            <i class="ri-mail-fill"></i>
+                        </div>
+                        @if(submitted && emailFormControl.errors) {
+                        <div class="text-red-600">Um email válido é obrigatório</div>
+                        }
+                    </label>
+                    <label class="block relative mt-5">
+                        <span class="block mb-1">
+                            Nome *
+                        </span>
+                        <input type="text" [formControl]="nameFormControl" placeholder="Seu nome aqui"
+                            class="w-full indent-7 rounded-sm placeholder:opacity-40"
+                            [ngClass]="{'border-red-600': submitted && nameFormControl.errors, 'focus:ring-red-600': submitted && nameFormControl.errors, 'focus:border-red-500': submitted && nameFormControl.errors}" />
+                        <div class="absolute top-[2.35rem] left-3 bg-white">
+                            <i class="ri-user-line"></i>
+                        </div>
+                        @if(submitted && nameFormControl.errors) {
+                        <div class="text-red-600">O nome é orbigatório</div>
+                        }
+                    </label>
+                    <label class="block relative mt-5">
+                        <span class="block mb-1">
+                            Senha *
+                        </span>
+                        <input type="password" [formControl]="passwordFormControl" placeholder="•••••••"
+                            class="w-full indent-7 rounded-sm placeholder:opacity-40"
+                            [ngClass]="{'border-red-600': submitted && passwordFormControl.errors, 'focus:ring-red-600': submitted && passwordFormControl.errors, 'focus:border-red-500': submitted && passwordFormControl.errors}" />
+                        <div class="absolute top-[2.35rem] left-3 bg-white">
+                            <i class="ri-shield-keyhole-fill"></i>
+                        </div>
+                        @if(submitted && passwordFormControl.errors && passwordFormControl.errors['required']) {
+                        <div class="text-red-600">A senha é obrigatória</div>
+                        } @else if(submitted && passwordFormControl.errors &&
+                        passwordFormControl.errors['passwordLength']) {
+                        <div class="text-red-600">A senha precisa ter no míninmo 8 caracteres</div>
+                        } @else if(submitted && passwordFormControl.errors &&
+                        passwordFormControl.errors['passwordUpperCase'])
+                        {
+                        <div class="text-red-600">A senha precisa ter no mínimo 1 letra MAIÚSCULA</div>
+                        }
+                        @else if(submitted && passwordFormControl.errors &&
+                        passwordFormControl.errors['passwordSpecialChar'])
+                        {
+                        <div class="text-red-600">A senha precisa ter no mínimo 1 caractér especial</div>
+                        }
+                        @else if(submitted && passwordFormControl.errors &&
+                        passwordFormControl.errors['passwordNumber']) {
+                        <div class="text-red-600">A senha precisa ter no mínimo 1 número</div>
+                        }
+                    </label>
+                    <label class="block relative mt-5 mb-5">
+                        <span class="block mb-1">
+                            Confirmar senha *
+                        </span>
+                        <input type="password" [formControl]="confirmPasswordFormControl" placeholder="•••••••"
+                            class="w-full indent-7 rounded-sm placeholder:opacity-40"
+                            [ngClass]="{'border-red-600': submitted && confirmPasswordFormControl.errors, 'focus:ring-red-600': submitted && confirmPasswordFormControl.errors, 'focus:border-red-500': submitted && confirmPasswordFormControl.errors}" />
+                        <div class="absolute top-[2.35rem] left-3 bg-white">
+                            <i class="ri-shield-keyhole-fill"></i>
+                        </div>
+                        @if(submitted && confirmPasswordFormControl.errors &&
+                        confirmPasswordFormControl.errors['required']) {
+                        <div class="text-red-600">A confirmação de senha é obrigatória</div>
+                        }
+                        @if(submitted && confirmPasswordFormControl.errors &&
+                        confirmPasswordFormControl.errors['passwordNotMatch']) {
+                        <div class="text-red-600">A confirmação de senha não está correta</div>
+                        }
+                    </label>
+
+                    <label class="block relative mt-5 text-sm">
+                        <input type="checkbox" class="rounded-sm mr-3 cursor-pointer"
+                            [formControl]="termsOfServiceFormControl"
+                            [ngClass]="{'border-red-600': submitted && termsOfServiceFormControl.errors, 'focus:ring-red-600': submitted && termsOfServiceFormControl.errors, 'focus:border-red-500': submitted && termsOfServiceFormControl.errors}">
+                        <span>Li e concordo com os <a class="text-blue-500 cursor-pointer">termos de serviço e privacidade</a></span>
+                        @if(submitted && termsOfServiceFormControl.errors &&
+                        termsOfServiceFormControl.errors['required']) {
+                        <div class="text-red-600">Você precisa aceitar os termos</div>
+                        }
+                    </label>
+                    <button
+                        class="bg-green-500 text-white font-semibold mt-5 py-2 w-full rounded-sm hover:bg-green-800 transition-colors"
+                        title="Registar" (click)="register()">REGISTRAR</button>
+                </form>
+            </section>
+        </section>
+
+    </section>
+</main>
