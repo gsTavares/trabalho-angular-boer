@@ -1,1 +1,32 @@
-<h1>dashboard works</h1>
+<section class="m-3">
+    <div class="flex flex-col w-full">
+        <div class="flex flex-wrap gap-3 w-full">
+            <div class="p-3 bg-blue-500 text-white flex-grow rounded-sm">
+                <p class="font-bold">Número de casos cadastrados</p>
+                <div>95</div>
+            </div>
+            <div class="p-3 bg-yellow-500 text-white flex-grow rounded-sm">
+                <p class="font-bold">Locais do mundo</p>
+                <div>7</div>
+            </div>
+            <div class="p-3 bg-red-500 text-white flex-grow rounded-sm">
+                <p class="font-bold">Casos positivos </p>
+                <div>36</div>
+            </div>
+            <div class="p-3 bg-green-500 text-white flex-grow rounded-sm">
+                <p class="font-bold">Casos negativos</p>
+                <div>59</div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5">
+        <div class="flex flex-col lg:grid lg:grid-cols-2">
+            <div>
+                <apx-chart [chart]="charts[0].chart" [series]="charts[0].series"></apx-chart>
+            </div>
+            <div>
+                <apx-chart [chart]="charts[1].chart" [series]="charts[1].series"></apx-chart>
+            </div>
+        </div>
+    </div>
+</section>

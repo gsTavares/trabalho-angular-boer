@@ -6,7 +6,13 @@ import { User } from '../@types/user';
 })
 export class UserService {
 
-  private _users: User[] = [];
+  private _users: User[] = [
+    {
+      email: 'teste@gmail.com',
+      name: 'Gustavo',
+      password: '123Mudar*'
+    }
+  ];
 
   constructor() { }
 
