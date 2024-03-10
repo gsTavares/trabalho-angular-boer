@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { User } from '../../@types/user';
+import * as decoder from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private loginService: LoginService,
     private userService: UserService,
   ) {
@@ -31,6 +33,15 @@ export class LoginComponent implements OnInit {
     this.passwordFormControl.addValidators(Validators.required);
   }
   ngOnInit(): void {
+
+    this.route.queryParams.subscribe(params => {
+      const token: string = params['token'];
+      const user: User = decoder.jwtDecode(token);
+      this.loginService.setLoginSubject(true);
+      this.loginService.setLoggedUserSubject(user);
+      this.router.navigate(['/dashboard']);
+    })
+
     const script = document.createElement('script');
     script.src = 'https://accounts.google.com/gsi/client';
     script.async = true;
@@ -42,7 +53,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.emailFormControl.valid && this.passwordFormControl.valid) {
       const user = this.userService.findByEmail(this.emailFormControl.value);
-      if(user) {
+      if (user) {
         this.loginService.setLoginSubject(true);
         this.loginService.setLoggedUserSubject(user);
         this.router.navigate(['/dashboard']);
