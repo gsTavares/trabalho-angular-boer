@@ -1,32 +1,82 @@
 <section class="m-3">
     <div class="flex flex-col w-full">
-        <div class="flex flex-wrap gap-3 w-full">
-            <div class="p-3 bg-blue-500 text-white flex-grow rounded-sm">
-                <p class="font-bold">Número de casos cadastrados</p>
-                <div>95</div>
-            </div>
+        <div class="flex flex-col lg:flex-row lg:flex-wrap gap-3 w-full">
             <div class="p-3 bg-yellow-500 text-white flex-grow rounded-sm">
                 <p class="font-bold">Locais do mundo</p>
                 <div>7</div>
             </div>
+            <div class="p-3 bg-blue-500 text-white flex-grow rounded-sm">
+                <p class="font-bold">Número de casos cadastrados</p>
+                <div>{{ barChartSeries[0]?.data[0].y ?? 0 }}</div>
+            </div>
             <div class="p-3 bg-red-500 text-white flex-grow rounded-sm">
                 <p class="font-bold">Casos positivos </p>
-                <div>36</div>
+                <div>{{ barChartSeries[0]?.data[1].y ?? 0 }}</div>
             </div>
             <div class="p-3 bg-green-500 text-white flex-grow rounded-sm">
                 <p class="font-bold">Casos negativos</p>
-                <div>59</div>
+                <div>{{ barChartSeries[0]?.data[2].y ?? 0}}</div>
             </div>
         </div>
+        <div class="flex flex-col mt-10">
+            <h2 class="font-semibold text-xl">Novo registro</h2>
+            <form [formGroup]="newRegisterForm!" #newRegisterFormElement="ngForm" class="flex flex-col w-full lg:grid lg:grid-cols-4 lg:gap-3">
+                <label class="block mt-3">
+                    <span class="block">Tipo de caso</span>
+                    <select class="form-select w-full rounded-sm" formControlName="caseType">
+                        <option [ngValue]="null">Selecione o tipo de caso</option>
+                        <option [ngValue]="'POSITIVO'">Positivo</option>
+                        <option [ngValue]="'NEGATIVO'">Negativo</option>
+                    </select>
+                </label>
+                <label class="block mt-3">
+                    <span class="block">País</span>
+                    <select class="form-select w-full rounded-sm" formControlName="country" [ngClass]="{
+                        'border-red-600': submitted && newRegisterForm!.get('country')?.errors, 
+                        'focus:ring-red-600': submitted && newRegisterForm!.get('country')?.errors, 
+                        'focus:border-red-500': submitted && newRegisterForm!.get('country')?.errors}">
+                        <option [ngValue]="null">Selecione o país</option>
+                        @for (country of countries; track $index) {
+                        <option [ngValue]="country">{{ country }}</option>
+                        }
+                    </select>
+                    @if(submitted && newRegisterForm!.get('country')?.errors) {
+                        @if(newRegisterForm!.get('country')?.errors?.['required']) {
+                        <div class="text-red-600">O país é obrigatório</div>
+                        }
+                    }
+                </label>
+                <label class="block mt-3">
+                    <span class="block">Quantidade</span>
+                    <input type="number" class="form-input w-full rounded-sm" placeholder="Quantidade"
+                        formControlName="quantity" [ngClass]="{
+                            'border-red-600': submitted && newRegisterForm!.get('quantity')?.errors, 
+                            'focus:ring-red-600': submitted && newRegisterForm!.get('quantity')?.errors, 
+                            'focus:border-red-500': submitted && newRegisterForm!.get('quantity')?.errors}">
+                    @if(submitted && newRegisterForm!.get('quantity')?.errors) {
+                        @if(newRegisterForm!.get('quantity')?.errors?.['required']) {
+                        <div class="text-red-600">A quantidade é obrigatória</div>
+                        }
+                        @if(newRegisterForm!.get('quantity')?.errors?.['min']) {
+                        <div class="text-red-600">A quantidade mínima é 1</div>
+                        }
+                    }
+                </label>
+                <div class="my-5 lg:my-0 lg:mb-[.1rem] lg:relative">
+                    <button class="p-2 bg-zinc-900 rounded-sm text-white font-semibold w-full lg:absolute lg:top-[37px]"
+                        title="Adicionar" (click)="updateSeries(newRegisterFormElement)">Adicionar</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="mt-5">
-        <div class="flex flex-col lg:grid lg:grid-cols-2">
+    <div class="mt-5 p-3">
+        <div class="flex flex-col">
             <div>
-                <apx-chart [chart]="charts[0].chart" [series]="charts[0].series"></apx-chart>
+                <apx-chart [chart]="barChart" [series]="barChartSeries" #barChartElement></apx-chart>
             </div>
-            <div>
+            <!-- <div>
                 <apx-chart [chart]="charts[1].chart" [series]="charts[1].series"></apx-chart>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
